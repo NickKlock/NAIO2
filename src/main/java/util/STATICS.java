@@ -6,7 +6,7 @@ public class STATICS{
     public static String BOT_TOKEN;
     public static String PREFIX ;
     public static String MYSQL_IP = "78.47.200.160";
-    public static String MYSQL_PASSWORD = "evo2ve16";
+    public static String MYSQL_PASSWORD = "";
     public static String MYSQL_DBNAME = "NAIO";
     public static String MYSQL_USER = "naio";
     public static String ELECTUS_CD_CAT_ID ;
