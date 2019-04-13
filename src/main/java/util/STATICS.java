@@ -5,8 +5,8 @@ import net.dv8tion.jda.core.JDA;
 public class STATICS{
     public static String BOT_TOKEN;
     public static String PREFIX ;
-    public static String MYSQL_IP = "78.47.200.160";
-    public static String MYSQL_PASSWORD = "";
+    public static String MYSQL_IP = "81.169.241.135";
+    public static String MYSQL_PASSWORD = "db4y6gnick";
     public static String MYSQL_DBNAME = "NAIO";
     public static String MYSQL_USER = "naio";
     public static String ELECTUS_CD_CAT_ID ;
