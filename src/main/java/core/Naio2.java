@@ -12,12 +12,14 @@ import listener.*;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
+import org.json.JSONObject;
 import util.STATICS;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Naio2{
@@ -96,6 +98,12 @@ public class Naio2{
             }
 
         }
+    }
+
+    public static void handleCrypto(CommandParser.CommandContainer cmd){
+        System.out.println(Arrays.toString(cmd.args));
+        System.out.println(cmd.invoke);
+        core.crypto.Crypto.getJson(cmd.invoke);
     }
 
 }

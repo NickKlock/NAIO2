@@ -24,6 +24,24 @@ public class CommandParser {
 
         return new CommandContainer(raw, beheaded, splitBeheaded, invoke, args, e);
     }
+    public CommandContainer parseCrypto(String rw, MessageReceivedEvent e) {
+
+        ArrayList<String> split = new ArrayList<>();
+
+        String raw = rw;
+        String beheaded = raw.substring(STATICS.CRYPTO_PREFIX.length(), raw.length());
+        String[] splitBeheaded = beheaded.split(" ");
+
+        for (String s : splitBeheaded) {
+            split.add(s);
+        }
+
+        String invoke = split.get(0);
+        String[] args = new String[split.size()-1];
+        split.subList(1, split.size()).toArray(args);
+
+        return new CommandContainer(raw, beheaded, splitBeheaded, invoke, args, e);
+    }
 
     public class CommandContainer {
 
