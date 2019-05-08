@@ -26,18 +26,14 @@ public class Settings implements Command{
             case "cd":
                 switch (args[1]){
                     case "on":
-                        try {
-                            Ready.timer.schedule(new Countdowns(),0,1000);
-                            setElectusCd(true);
-                            CMD_REACTION.positive(event);
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
+                        // Ready.timer.schedule(new Countdowns(),0,1000);
+                        //setElectusCd(true);
+                        CMD_REACTION.positive(event);
                         break;
                     case "off":
                         try {
                             setElectusCd(false);
-                            Ready.timer.purge();
+                            //Ready.timer.purge();
                             CMD_REACTION.positive(event);
                         } catch (SQLException e) {
                             e.printStackTrace();

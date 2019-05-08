@@ -27,12 +27,14 @@ public class Commands extends ListenerAdapter{
             e.getTextChannel().sendMessage(response).complete();
             return;
         }
-        if (e.getMessage().getContentRaw().startsWith(STATICS.PREFIX) && e.getMessage().getAuthor().getId() != e.getJDA().getSelfUser().getId()) {
+        if (e.getMessage().getContentRaw().startsWith(STATICS.PREFIX) && !e.getMessage().getAuthor().getId().equals(e.getJDA().getSelfUser().getId())) {
             try {
                 Naio2.handleCommand(Naio2.parser.parse(e.getMessage().getContentRaw(),e));
             } catch (ParseException | IOException e1) {
                 e1.printStackTrace();
             }
+        }else if (e.getMessage().getContentRaw().startsWith(STATICS.getCryptoPrefix()) && !e.getMessage().getAuthor().getId().equals(e.getJDA().getSelfUser().getId())) {
+            Naio2.handleCrypto(Naio2.parser.parseCrypto(e.getMessage().getContentRaw(),e));
         }
     }
 }

@@ -11,15 +11,15 @@ import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 
 public class Ready extends ListenerAdapter{
-    public  static Timer timer;
+    //public  static Timer timer;
 
     @Override
     public void onReady(ReadyEvent event){
         STATICS.setJDA(event.getJDA());
         if (STATICS.isElectusCd()) {
             System.out.println("setting up countdown...");
-            timer = new Timer();
-            timer.schedule(new Countdowns(), 0, 1000);
+           // timer = new Timer();
+            //timer.schedule(new Countdowns(), 0, 1000);
             System.out.println("setting up countdown done");
 
         }

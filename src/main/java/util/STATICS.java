@@ -5,8 +5,8 @@ import net.dv8tion.jda.core.JDA;
 public class STATICS{
     public static String BOT_TOKEN;
     public static String PREFIX ;
-    public static String MYSQL_IP = "81.169.241.135";
-    public static String MYSQL_PASSWORD = "db4y6gnick";
+    public static String MYSQL_IP = "81.169.241.135:3306";
+    public static String MYSQL_PASSWORD = "evo2ve16";
     public static String MYSQL_DBNAME = "NAIO";
     public static String MYSQL_USER = "naio";
     public static String ELECTUS_CD_CAT_ID ;
@@ -15,6 +15,16 @@ public class STATICS{
     public static String input;
     public static String MUSIC_CHANNEL;
     public static String VOICELOG_CHANNEL;
+    public static String CRYPTO_PREFIX = "!";
+
+    public static String getCryptoPrefix() {
+        return CRYPTO_PREFIX;
+    }
+
+    public static void setCryptoPrefix(String cryptoPrefix) {
+        CRYPTO_PREFIX = cryptoPrefix;
+    }
+
 
     public static String getVoicelogChannel(){
         return VOICELOG_CHANNEL;
