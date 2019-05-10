@@ -45,18 +45,43 @@ public class Raffle implements Command{
 
         participants = new LinkedList<>(Arrays.asList(args));
         CMD_REACTION.positive(event);
+        switch (String.valueOf(isInt(args[0]))){
+            case "true":
+                int howMany = Integer.valueOf(args[0]);
+                participants.remove(args[0]);
+                multi = true;
+                if(participants.size() < 23){
+                    for (int i = 1; i <= howMany; i++){
+                        event.getTextChannel().sendMessage(createMessage().build()).complete();
+                    }
+                    multi = false;
+                }else {
+                    for (int i = 1; i <= howMany; i++){
+                        StringBuilder list = new StringBuilder();
+                        for (int a = 0 ; a < participants.size(); a++){
+                            int ii = a+1;
+                            list.append("#").append(ii).append(" - ").append(participants.get(a)).append("\n");
+                        }
+                        event.getTextChannel().sendMessage(createMessage(list.toString()).build()).complete();
+                    }
+                    multi = false;
+                    return;
+                }
+                break;
+            case "false":
+                if (participants.size() < 23) {
+                    event.getTextChannel().sendMessage(createMessage().build()).complete();
+                }else{
+                    StringBuilder list = new StringBuilder();
+                    for (int a = 0 ; a < participants.size(); a++){
+                        int ii = a+1;
+                        list.append("#").append(ii).append(" - ").append(participants.get(a)).append("\n");
+                    }
+                    event.getTextChannel().sendMessage(createMessage(list.toString()).build()).complete();
+                }
+                break;
 
-        if (isInt(args[0])){
-            int howMany = Integer.valueOf(args[0]);
-            participants.remove(args[0]);
-            multi = true;
-            for (int i = 1; i <= howMany; i++){
-                event.getTextChannel().sendMessage(createMessage().build()).complete();
-            }
-            multi = false;
-            return;
         }
-        event.getTextChannel().sendMessage(createMessage().build()).complete();
 
     }
 
@@ -87,6 +112,29 @@ public class Raffle implements Command{
 
         return msg;
     }
+    private static EmbedBuilder createMessage(String list){
+        LocalDateTime localDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.LLLL.yyyy HH:mm");
+        String formattedString = localDateTime.format(formatter);
+
+        EmbedBuilder msg = new EmbedBuilder()
+                .setColor(Color.YELLOW)
+                .setTitle("Participants")
+                .setFooter("Raffle date: "+formattedString,null)
+                .setDescription(list);
+
+        msg.addBlankField(false);
+        int randomNum = ThreadLocalRandom.current().nextInt(0, participants.size() );
+        msg.addField("WINNER","Number: "+(randomNum+1) + " | Name: "+participants.get(randomNum),false);
+
+        if (multi) {
+            participants.remove(randomNum);
+        }
+
+
+        return msg;
+    }
+
 
     @Override
     public void executed(boolean success, MessageReceivedEvent event){

@@ -34,7 +34,15 @@ public class Commands extends ListenerAdapter{
                 e1.printStackTrace();
             }
         }else if (e.getMessage().getContentRaw().startsWith(STATICS.getCryptoPrefix()) && !e.getMessage().getAuthor().getId().equals(e.getJDA().getSelfUser().getId())) {
+<<<<<<< HEAD
             Naio2.handleCrypto(Naio2.parser.parseCrypto(e.getMessage().getContentRaw(),e));
+=======
+            try {
+                Naio2.handleCrypto(Naio2.parser.parseCrypto(e.getMessage().getContentRaw(),e));
+            } catch (IOException | ParseException e1) {
+                e1.printStackTrace();
+            }
+>>>>>>> master
         }
     }
 }
