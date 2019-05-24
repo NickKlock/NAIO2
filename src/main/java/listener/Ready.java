@@ -32,10 +32,9 @@ public class Ready extends ListenerAdapter{
     private static void initializeBirthdayTask(){
         System.out.println("initializing birthday reminder...");
         Calendar today = Calendar.getInstance();
-        today.set(Calendar.HOUR_OF_DAY, 0);
-        today.set(Calendar.MINUTE, 0);
-        today.set(Calendar.SECOND, 0);
-        Timer timer2 = new Timer();
+        today.set(Calendar.HOUR_OF_DAY, 9);
+        today.set(Calendar.MINUTE, 23);
+        today.set(Calendar.SECOND, 30);        Timer timer2 = new Timer();
         timer2.schedule(new Birthday(), today.getTime(), TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS));
         System.out.println("initializing birthday reminder done");
 

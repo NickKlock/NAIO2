@@ -22,7 +22,7 @@ import java.text.ParseException;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class Naio2{
+public class Naio2 {
     private static JDA jda;
     private static JDABuilder jdaBuilder;
     public static final CommandParser parser = new CommandParser();
@@ -38,11 +38,12 @@ public class Naio2{
             setupBot();
             System.out.println("initializing bot done");
 
-        } catch (LoginException  | SQLException e) {
+        } catch (LoginException | SQLException e) {
             e.printStackTrace();
         }
     }
-    private static void setupBot() throws LoginException{
+
+    private static void setupBot() throws LoginException {
         jdaBuilder = new JDABuilder(AccountType.BOT)
                 .setToken(STATICS.getBotToken())
                 .setAudioEnabled(true);
@@ -55,6 +56,7 @@ public class Naio2{
         System.out.println("initializing jda done");
 
     }
+
     private static void initializeListeners() {
         System.out.println("initializing listeners...");
         jdaBuilder.addEventListener(new Ready())
@@ -67,15 +69,16 @@ public class Naio2{
         System.out.println("initializing listeners done");
 
     }
-    private static void initializeCommands(){
+
+    private static void initializeCommands() {
         System.out.println("initializing commands...");
 
-        commands.put("raffle",new Raffle());
-        commands.put("r",new Raffle());
-        commands.put("triggers",new Triggers());
-        commands.put("t",new Triggers());
-        commands.put("s",new commands.admin.Settings());
-        commands.put("bd",new Birthday());
+        commands.put("raffle", new Raffle());
+        commands.put("r", new Raffle());
+        commands.put("triggers", new Triggers());
+        commands.put("t", new Triggers());
+        commands.put("s", new commands.admin.Settings());
+        commands.put("bd", new Birthday());
         commands.put("m", new Music());
         commands.put("help", new Help());
         commands.put("h", new Help());
@@ -87,7 +90,8 @@ public class Naio2{
         System.out.println("initializing commands done.");
 
     }
-    public static void handleCommand(CommandParser.CommandContainer cmd) throws ParseException, IOException{
+
+    public static void handleCommand(CommandParser.CommandContainer cmd) throws ParseException, IOException {
 
         if (commands.containsKey(cmd.invoke.toLowerCase())) {
 
@@ -103,12 +107,7 @@ public class Naio2{
         }
     }
 
-<<<<<<< HEAD
-    public static void handleCrypto(CommandParser.CommandContainer cmd){
-        System.out.println(Arrays.toString(cmd.args));
-        System.out.println(cmd.invoke);
-        core.crypto.Crypto.getJson(cmd.invoke);
-=======
+
     public static void handleCrypto(CommandParser.CommandContainer cmd) throws IOException, ParseException{
 
         if (cmd.args.length <1){
@@ -118,7 +117,6 @@ public class Naio2{
                 commands.get(cmd.invoke.toLowerCase()).action(cmd.args, cmd.event);
             }
         }
->>>>>>> master
-    }
 
+    }
 }
