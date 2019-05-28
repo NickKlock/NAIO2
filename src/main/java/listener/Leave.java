@@ -11,7 +11,7 @@ public class Leave extends ListenerAdapter{
 
     @Override
     public void onGuildMemberLeave(GuildMemberLeaveEvent event){
-        TextChannel defaultChannel = event.getGuild().getDefaultChannel();
+        TextChannel defaultChannel = event.getGuild().getTextChannelsByName("general",false).get(0);
         EmbedBuilder builder = new EmbedBuilder()
                 .setColor(Color.RED)
                 .setDescription(event.getUser().getAsTag()+" just left the server.");

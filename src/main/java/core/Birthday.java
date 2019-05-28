@@ -11,15 +11,17 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Birthday extends TimerTask{
-    private static HashMap<LocalDate, String> birthdays;
 
 
     @Override
     public void run(){
+        HashMap<LocalDate, String> birthdays = null;
+
         System.out.println("checking for birthdays");
         try {
             birthdays = core.mysql.functions.Birthday.getBirthdays();
@@ -27,9 +29,11 @@ public class Birthday extends TimerTask{
             e.printStackTrace();
         }
         LocalDate today = LocalDate.now();
-        birthdays.forEach((k,v) -> {
+        Objects.requireNonNull(birthdays).forEach((k, v) -> {
             if (k.getDayOfMonth() == today.getDayOfMonth() && k.getMonthValue() == today.getMonthValue()){
-                birthdayMsg(k,v,today);
+
+                //birthdayMsg(k,v,today);
+                System.out.println(v + true);
             }
         });
     }
