@@ -1,12 +1,14 @@
 package core.mysql.functions;
 
 
+import core.models.Bd;
 import core.mysql.connection.Connector;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -35,11 +37,11 @@ public class Birthday  {
 
     public static void addBirthday(MessageReceivedEvent event, LocalDate date) throws SQLException{
         Connection connection = Connector.connect();
+        //System.out.println(Date.valueOf(date).toString());
         PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Birthday(userID, userName, birthday) VALUES (?,?,?)");
         preparedStatement.setString(1,event.getMember().getUser().getId());
         preparedStatement.setString(2,event.getMember().getUser().getName());
-        preparedStatement.setDate(3,Date.valueOf(date));
-        preparedStatement.executeUpdate();
+        preparedStatement.setString(3,Date.valueOf(date).toString());
         preparedStatement.executeUpdate();
 
         preparedStatement.close();
@@ -54,6 +56,26 @@ public class Birthday  {
 
         preparedStatement.close();
         connection.close();
+    }
+
+    public static ArrayList<Bd> nextBirthdays() throws SQLException{
+        LocalDate now = LocalDate.now();
+        Connection connection = Connector.connect();
+        PreparedStatement preparedStatement = connection.prepareStatement("select userID,birthday from Birthday where date_format(birthday,'%m-%d') > date_format(?, '%m-%d') order by extract(month from birthday), extract(day from birthday) LIMIT 5");
+        preparedStatement.setString(1,now.toString());
+        ResultSet rs =preparedStatement.executeQuery();
+        ArrayList<Bd> bds = new ArrayList<>();
+        while (rs.next()){
+            Bd bd = new Bd();
+            bd.setId(rs.getString(1));
+            bd.setBd(rs.getDate(2).toLocalDate());
+
+            bds.add(bd);
+        }
+        rs.close();
+        preparedStatement.close();
+        connection.close();
+        return bds;
     }
 
 
